@@ -38,12 +38,13 @@ public class Cube : MonoBehaviour
             {
                 if(_hit.collider.gameObject == gameObject)
                 {
-                    Vector3 spawnPosition1 = transform.position;
-                    Vector3 newCubeScale = transform.localScale/2;
+                    int numberDivideScaleCub = 2;
+                    Vector3 spawnPosition = transform.position;
+                    Vector3 newCubeScale = transform.localScale/numberDivideScaleCub;
 
                     if (Random.value<=CurrentChance)
                     {
-                        _cubeManager.SpawnCubes(spawnPosition1, newCubeScale, CurrentChance, _cubePrefab);
+                        _cubeManager.SpawnCubes(spawnPosition, newCubeScale, CurrentChance, _cubePrefab);
                         Destroy(gameObject);
                     }
                     else
