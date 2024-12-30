@@ -147,9 +147,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1030208103372624b8acbe60a9e6ff0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exception: {fileID: 6967656648043287684}
   _cubePrefab: {fileID: 9206838299884828884}
   _cubeManager: {fileID: 4261430081748613410, guid: 844701e294ff9684a907ca25b2b2ab88, type: 3}
-  _explosionRadius: 50
+  _explosionRadius: 10
+  _explosionForce: 200
   CurrentChance: 0
 --- !u!114 &6967656648043287684
 MonoBehaviour:

@@ -1,14 +1,36 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    private int _magnitudeUpwardForce = 10;
+    private float _radiusExplode;
+    private float _explodeForce;
 
-    public void Exlode(Cube cube)
+    public void Explode(float baseRadius, float baseForce, float cubeScaleFactor)
     {
-        if(cube.TryGetComponent<Rigidbody>(out Rigidbody newCubeRigidbody))
+        _radiusExplode = baseRadius / cubeScaleFactor;
+        _explodeForce = baseForce / cubeScaleFactor;
+
+        foreach (Rigidbody explodableObject in GetExplodableObjects())
         {
-            newCubeRigidbody.AddForce(Vector3.up * _magnitudeUpwardForce, ForceMode.Impulse);
+            explodableObject.AddExplosionForce(_explodeForce, transform.position, _radiusExplode);
         }
+    }
+
+    private List<Rigidbody> GetExplodableObjects()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, _radiusExplode);
+        
+        List<Rigidbody> barrels = new List<Rigidbody>();
+
+        foreach (Collider hit in hits)
+        {
+            if (hit.attachedRigidbody!=null)
+            {
+                barrels.Add(hit.attachedRigidbody);
+            }
+        }
+
+        return barrels;
     }
 }

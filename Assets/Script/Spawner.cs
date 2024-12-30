@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private Explosion exception;
-
     private int _minNumberRandomRange = 2;
     private int _maxNumberRandomRange = 6;
 
@@ -16,8 +14,6 @@ public class Spawner : MonoBehaviour
         {
             Cube newCube = Instantiate(_cubePrefab, position, Quaternion.identity);
             newCube.transform.localScale = scale;
-
-            exception.Exlode(newCube);
 
             if (newCube.TryGetComponent(out Cube cubeScript))
             {

@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
+    [SerializeField] private Explosion exception;
     [SerializeField] private Cube _cubePrefab;
     [SerializeField] private Spawner _cubeManager;
     [SerializeField] private float _explosionRadius;
+    [SerializeField] private float _explosionForce;
 
     private Camera _camera;
     
@@ -45,12 +47,14 @@ public class Cube : MonoBehaviour
                     if (Random.value<=CurrentChance)
                     {
                         _cubeManager.SpawnCubes(spawnPosition, newCubeScale, CurrentChance, _cubePrefab);
-                        Destroy(gameObject);
                     }
                     else
                     {
-                        Destroy(gameObject);
+                        float cubeScaleFactor = 1 / transform.localScale.magnitude;
+                        exception.Explode(_explosionRadius, _explosionForce, cubeScaleFactor);
                     }
+
+                    Destroy(gameObject);
                 }
             }
         }
